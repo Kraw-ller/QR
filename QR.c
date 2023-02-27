@@ -3,15 +3,30 @@
 #include <string.h>
 #include <iconv.h>
 
+//need to make the input a file or string at same time
+
+int typeis(char data[]);
 
 int main(int argc, char* argv[])
 {
-	//data analysis
+	//char mode[50]= "";
+	char *data = "1110";
+
+	int mode = typeis(data);
+	printf("%i", mode);
+
+	//choose the error correction level		
+	
+//	printf("%s",&argv);
+	return 0;
+}
+
+int typeis(char data[])
+{
+		//data analysis
 	//accept string
 	//findout the mode: numeric, alphanumeric, byte or kannji
-	char mode[50]= "";
-
-	char data[] = "1110";
+	
 	size_t inputLength = sizeof(data);
 	int numericInt = 0;
 	int alphanumericInt= 0;
@@ -82,15 +97,28 @@ int main(int argc, char* argv[])
 //		free(outbuf);*/
 
 		if((isoInt == 1) )
-		printf("byte ISO");
+		{printf("byte ISO");
+		return 1;}
+		
 		else if((utfInt == 1))
-		printf("byte UTF-8");
+		{printf("byte UTF-8");
+		return 2;}
+		
 	    else if(alphanumericInt == 1)
-	    printf("alphanumeric");
+	    {printf("alphanumeric");
+	    return 3;}
+	    
      	else if(numericInt == 1) 
-    	printf("numeric");
-			
-	
-//	printf("%s",&argv);
-	return 0;
+    	{printf("numeric");
+		return 4;}
+		
+}
+
+char *ReedSolomon(char *data)
+{
+	//takes string as input
+	//allocates memory for string output
+	//return pointer of that string
+	//copy that string into a new one in main
+	//free space
 }

@@ -6,16 +6,37 @@
 //need to make the input a file or string at same time
 
 int typeis(char data[]);
+char *ReedSolomon(char *data, char level);
+int charCapacity(int codeVersion, char EC_Level);
 
+int codeVersion;
+int length = NULL; //for now
 int main(int argc, char* argv[])
 {
+	char *dataFile = argv[1];
+	codeVersion = argv[2]; // 1-40
+	char EC_Level = argv[3]; //L 7%, M 15%, Q 25%, H 30%
+
 	//char mode[50]= "";
 	char *data = "1110";
 
 	int mode = typeis(data);
 	printf("%i", mode);
 
-	//choose the error correction level		
+	//choose the error correction level	
+	//length depends on code version follow table	
+	char *charCount = malloc(length);
+	
+	
+	//error correction part of main
+	char *correctionData = ReedSolomon(data, EC_Level);
+	if(correctionData)
+	{
+		//do your thing
+		free(correctionData);
+	}
+ 
+	
 	
 //	printf("%s",&argv);
 	return 0;
@@ -78,47 +99,57 @@ int typeis(char data[])
 				//printf("%s\n", mode);
 			}
     }
-	/*	//check if the input is a valid ISO-8859-1
-		iconv_t conv = iconv_open("UTF-8", "ISO-8859-1");
-		char* inbuf = data;
-		size_t inbytesleft = inputLength;
-		char *outbuf = malloc(strlen(inbuf) + 1);
-		size_t outbytesleft = sizeof(outbuf);
-		size_t result = iconv(conv, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
-		char **outptr = &outbuf;
-		//if the message can be converted to UTF-8 using ISO-8859-1 encoding, print a message and exit
-		if(result != (size_t)-1)
-		{
-//			printf("ISO_8859-1 encoding detcted. \n");
-			isoInt = 1;
-			
-		}
-
-//		free(outbuf);*/
+	
 
 		if((isoInt == 1) )
 		{printf("byte ISO");
-		return 1;}
+		return 0100;}
 		
 		else if((utfInt == 1))
 		{printf("byte UTF-8");
-		return 2;}
+		return 0100;}
 		
 	    else if(alphanumericInt == 1)
 	    {printf("alphanumeric");
-	    return 3;}
+	    return 0010;}
 	    
      	else if(numericInt == 1) 
     	{printf("numeric");
-		return 4;}
+		return 0001;}
 		
 }
 
-char *ReedSolomon(char *data)
+char *ReedSolomon(char *data, char level)
 {
 	//takes string as input
 	//allocates memory for string output
 	//return pointer of that string
 	//copy that string into a new one in main
 	//free space
+
+	int length = sizeof(data);
+
+	//correction
+
+	char *correctedData = "";
+	char *pnt = malloc(sizeof(correctedData));
+	strcpy(pnt, correctedData);
+
+	return pnt;
+}
+
+int charCapacity(int codeVersion, char EC_Level)
+{
+	int capacity;
+	//open csv file 
+	FILE *fptr;
+	fptr = fopen("capacities.csv", "r+");
+	//find the version
+	long int line;
+	int location;
+	
+	//find the type
+	//return the character capacity and close file
+	fclose(fptr);
+	return capacity;
 }
